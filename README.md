@@ -24,4 +24,4 @@ docker pull structurizr/lite
 docker run -it --rm -p 8080:8080 -v $DATA_FOLDER:/usr/local/structurizr structurizr/lite
 ```
 
-To this point, just open up your local host on the port 8080, and you are ready to go. To restart the render of your workspace, just reload the page in the browser.
+To this point, just open the [localhost](http://localhost:8080/workspace/diagrams) url and you are ready to go. To restart the render of your workspace, just reload the page in the browser.
