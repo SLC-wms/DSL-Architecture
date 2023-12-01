@@ -1,0 +1,5 @@
+= SLC-wms Architecture
+
+Here is an overview.
+
+image::embed:SystemLandscape[Full Architecture]
