@@ -12,15 +12,18 @@ AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor=
 
 AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
 
-AddBoundaryTag("Operation Employees", $borderColor="#cccccc", $fontColor="#cccccc")
-Boundary(group_1, "Operation Employees", $tags="Operation Employees") {
-  Person(PackingEmployee, "Packing Employee", $descr="", $tags="Employee", $link="")
+Enterprise_Boundary(enterprise, "SLC-wms") {
+  System(PickingModule, "Picking Module", $descr="", $tags="Context", $link="")
+  System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
+  System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+  System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
 }
 
-System(PickingModule, "Picking Module", $descr="", $tags="Context", $link="")
-System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
-System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
-System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+AddBoundaryTag("Operation Employees", $borderColor="#cccccc", $fontColor="#cccccc")
+Boundary(group_1, "Operation Employees", $tags="Operation Employees") {
+  Person_Ext(PackingEmployee, "Packing Employee", $descr="", $tags="Employee", $link="")
+}
+
 
 Rel_D(PackingEmployee, ShippingModule, "Finishes orders", $techn="", $tags="Relationship", $link="")
 Rel_D(ShippingModule, DatabaseModule, "Retrieve orders", $techn="Message Broker", $tags="Relationship", $link="")

@@ -12,16 +12,19 @@ AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor=
 
 AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
 
-AddBoundaryTag("Operation Managers", $borderColor="#cccccc", $fontColor="#cccccc")
-Boundary(group_1, "Operation Managers", $tags="Operation Managers") {
-  Person(Administrator, "Administrator", $descr="", $tags="Employee", $link="")
+Enterprise_Boundary(enterprise, "SLC-wms") {
+  System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
+  System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
+  System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+  System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+  System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
 }
 
-System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
-System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
-System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
-System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
-System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
+AddBoundaryTag("Operation Managers", $borderColor="#cccccc", $fontColor="#cccccc")
+Boundary(group_1, "Operation Managers", $tags="Operation Managers") {
+  Person_Ext(Administrator, "Administrator", $descr="", $tags="Employee", $link="")
+}
+
 
 Rel_D(ReceptionModule, DatabaseModule, "Sends new values", $techn="Message Broker", $tags="Relationship", $link="")
 Rel_D(Administrator, ConfigurationsModule, "Make changes with", $techn="", $tags="Relationship", $link="")
