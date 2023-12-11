@@ -12,18 +12,15 @@ AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor=
 
 AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
 
-Enterprise_Boundary(enterprise, "SLC-wms") {
-  System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
-  System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
-  System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
-  System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
-}
-
 AddBoundaryTag("Operation Managers", $borderColor="#cccccc", $fontColor="#cccccc")
 Boundary(group_1, "Operation Managers", $tags="Operation Managers") {
-  Person_Ext(LogisticAnalyst, "Logistic Analyst", $descr="", $tags="Employee", $link="")
+  Person(LogisticAnalyst, "Logistic Analyst", $descr="", $tags="Employee", $link="")
 }
 
+System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
+System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
 
 Rel_D(ConfigurationsModule, DatabaseModule, "Change the configuration", $techn="Message Broker", $tags="Relationship", $link="")
 Rel_D(ConfigurationsModule, AnalyticsModule, "Update schedule", $techn="HTTPS Request", $tags="Relationship", $link="")

@@ -13,33 +13,30 @@ AddElementTag("External", $bgColor="#d0a7ff", $borderColor="#9174b2", $fontColor
 
 AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
 
-Enterprise_Boundary(enterprise, "SLC-wms") {
-  System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
-  System(LayoutModule, "Layout Module", $descr="", $tags="Context", $link="")
-  System(PickingModule, "Picking Module", $descr="", $tags="Context", $link="")
-  System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
-  System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
-  System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
-  System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
-  System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
-  System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
-}
-
 AddBoundaryTag("Operation Employees", $borderColor="#cccccc", $fontColor="#cccccc")
 Boundary(group_1, "Operation Employees", $tags="Operation Employees") {
-  Person_Ext(ReceivingEmployee, "Receiving Employee", $descr="", $tags="Employee", $link="")
-  Person_Ext(PickingEmployee, "Picking Employee", $descr="", $tags="Employee", $link="")
-  Person_Ext(PackingEmployee, "Packing Employee", $descr="", $tags="Employee", $link="")
+  Person(ReceivingEmployee, "Receiving Employee", $descr="", $tags="Employee", $link="")
+  Person(PickingEmployee, "Picking Employee", $descr="", $tags="Employee", $link="")
+  Person(PackingEmployee, "Packing Employee", $descr="", $tags="Employee", $link="")
 }
 
 AddBoundaryTag("Operation Managers", $borderColor="#cccccc", $fontColor="#cccccc")
 Boundary(group_2, "Operation Managers", $tags="Operation Managers") {
-  Person_Ext(Administrator, "Administrator", $descr="", $tags="Employee", $link="")
-  Person_Ext(LogisticAnalyst, "Logistic Analyst", $descr="", $tags="Employee", $link="")
-  Person_Ext(LayoutManager, "Layout Manager", $descr="", $tags="Employee", $link="")
+  Person(Administrator, "Administrator", $descr="", $tags="Employee", $link="")
+  Person(LogisticAnalyst, "Logistic Analyst", $descr="", $tags="Employee", $link="")
+  Person(LayoutManager, "Layout Manager", $descr="", $tags="Employee", $link="")
 }
 
-System_Ext(ECommerce, "E-Commerce", $descr="", $tags="External", $link="")
+System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
+System(LayoutModule, "Layout Module", $descr="", $tags="Context", $link="")
+System(PickingModule, "Picking Module", $descr="", $tags="Context", $link="")
+System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
+System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
+System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+System(ECommerce, "E-Commerce", $descr="", $tags="External", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
 
 Rel_D(PackingEmployee, ShippingModule, "Finishes orders", $techn="", $tags="Relationship", $link="")
 Rel_D(ShippingModule, DatabaseModule, "Retrieve orders", $techn="Message Broker", $tags="Relationship", $link="")

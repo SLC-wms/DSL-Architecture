@@ -17,7 +17,7 @@ AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle
 AddBoundaryTag("Context", $bgColor="#ffffff", $borderColor="#4985b2", $fontColor="#4985b2", $shadowing="")
 
 System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
-System_Ext(ECommerce, "E-Commerce", $descr="", $tags="External", $link="")
+System(ECommerce, "E-Commerce", $descr="", $tags="External", $link="")
 System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
 System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
 

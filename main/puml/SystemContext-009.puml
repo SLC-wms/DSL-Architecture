@@ -12,17 +12,14 @@ AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor=
 
 AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
 
-Enterprise_Boundary(enterprise, "SLC-wms") {
-  System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
-  System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
-  System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
-}
-
 AddBoundaryTag("Operation Employees", $borderColor="#cccccc", $fontColor="#cccccc")
 Boundary(group_1, "Operation Employees", $tags="Operation Employees") {
-  Person_Ext(ReceivingEmployee, "Receiving Employee", $descr="", $tags="Employee", $link="")
+  Person(ReceivingEmployee, "Receiving Employee", $descr="", $tags="Employee", $link="")
 }
 
+System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
+System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
 
 Rel_D(ReceivingEmployee, ReceptionModule, "Fills a form", $techn="", $tags="Relationship", $link="")
 Rel_D(ReceptionModule, DatabaseModule, "Sends new values", $techn="Message Broker", $tags="Relationship", $link="")

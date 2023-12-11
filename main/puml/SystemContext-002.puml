@@ -12,14 +12,11 @@ AddElementTag("External", $bgColor="#d0a7ff", $borderColor="#9174b2", $fontColor
 
 AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
 
-Enterprise_Boundary(enterprise, "SLC-wms") {
-  System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
-  System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
-  System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
-  System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
-}
-
-System_Ext(ECommerce, "E-Commerce", $descr="", $tags="External", $link="")
+System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+System(ECommerce, "E-Commerce", $descr="", $tags="External", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
 
 Rel_D(ConfigurationsModule, DatabaseModule, "Change the configuration", $techn="Message Broker", $tags="Relationship", $link="")
 Rel_D(ConfigurationsModule, InventoryModule, "Update schedule", $techn="HTTPS Request", $tags="Relationship", $link="")

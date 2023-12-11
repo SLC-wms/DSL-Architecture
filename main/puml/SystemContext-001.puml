@@ -11,17 +11,14 @@ AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor=
 
 AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
 
-Enterprise_Boundary(enterprise, "SLC-wms") {
-  System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
-  System(LayoutModule, "Layout Module", $descr="", $tags="Context", $link="")
-  System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
-  System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
-  System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
-  System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
-  System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
-  System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
-}
-
+System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
+System(LayoutModule, "Layout Module", $descr="", $tags="Context", $link="")
+System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
+System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
+System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
 
 Rel_D(ShippingModule, DatabaseModule, "Retrieve orders", $techn="Message Broker", $tags="Relationship", $link="")
 Rel_D(ShippingModule, MissionsModule, "Accepts completion", $techn="Message Broker", $tags="Relationship", $link="")

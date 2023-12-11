@@ -19,7 +19,7 @@ AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle
 AddBoundaryTag("Context", $bgColor="#ffffff", $borderColor="#4985b2", $fontColor="#4985b2", $shadowing="")
 
 System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
-Person_Ext(Administrator, "Administrator", $descr="", $tags="Employee", $link="")
+Person(Administrator, "Administrator", $descr="", $tags="Employee", $link="")
 System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
 System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
 System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
