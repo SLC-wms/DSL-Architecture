@@ -14,8 +14,11 @@ concurrency:
     cancel-in-progress: false
 
 jobs:
-    build:
+    deploy:
         runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
         container:
             image: ghcr.io/avisi-cloud/structurizr-site-generatr
             options: --user root
@@ -23,33 +26,25 @@ jobs:
           - name: Git Checkout
             uses: actions/checkout@v4
 
-          - name: Build the site
+          - name: Build Site with Generatr
             run: |
-                /opt/structurizr-site-generatr/bin/structurizr-site-generatr generate-site -w src/workspace.dsl
+                /opt/structurizr-site-generatr/bin/structurizr-site-generatr generate-site \
+                -w src/workspace.dsl \
+                --assets-dir src/assets \
+                --branches main \
+                --default-branch main
 
-          - name: Upload the built site
-            uses: actions/upload-artifact@v3
-            with:
-                name: website
-                path: build/site
-    
-    deploy:
-        needs: build
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/download-artifact@v3
-            with:
-                name: website
-                path: build/site
-          - name: Setup Pages
+          - name: Setup Github Pages
+            if: ${{ success() }}
             uses: actions/configure-pages@v3
-          - name: Upload artifact
+
+          - name: Upload Artifact
+            if: ${{ success() }}
             uses: actions/upload-pages-artifact@v2
             with:
                 path: 'build/site'
+
           - name: Deploy to GitHub Pages
+            if: ${{ success() }}
             id: deployment
             uses: actions/deploy-pages@v2
