@@ -26,5 +26,4 @@ analytics = softwareSystem "Analytics Module" "" "Context"
 configs = softwareSystem "Configurations Module" "" "Context"
 
 // External systems
-ecommerce = softwareSystem "E-Commerce" "(or equivalent)" "External"
-    
+ecommerce = softwareSystem "E-Commerce" "(or equivalent)" "External System"
