@@ -1,9 +1,11 @@
 element "Element" {
     color "#000000"
+    fontSize 28
     metadata false
 }
 relationship "Relationship" {
     color "#000000"
+    fontSize 32
     style solid
     routing Curved
 }
