@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en" class="has-background-light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SLC-wms</title>
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+    <link href="./style-branding.css" rel="stylesheet">
+    <script type="text/javascript" src="../svg-modal.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+    <link href="site/favicon.ico" rel="icon" type="image/ico">
+    <link href="site/custom.css" rel="stylesheet">
+  </head>
+  <body>
+    <script type="text/javascript" src="../header.js"></script>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand has-site-branding"><a href="./" class="navbar-item"><img alt="SLC-wms" src="site/logo.png"></a><a href="./" class="navbar-item"><span class="has-text-weight-semibold has-site-branding">SLC-wms</span></a></div>
+      <div class="navbar-menu has-site-branding">
+        <div class="navbar-end">
+          <div class="navbar-item"><input class="input is-small is-rounded has-site-branding" id="search" type="search" size="30" maxlength="50" placeholder="Search (requires 3 characters)..." onkeyup="redirect(event, value, 'search/')"></div>
+          <div class="navbar-item has-dropdown is-hoverable"><a class="navbar-link has-site-branding">main</a>
+            <div class="navbar-dropdown is-right"><a href="./../main/" class="navbar-item">main</a>
+              <hr class="navbar-divider">
+              <div class="navbar-item has-text-grey-light"><span>v</span><span>0.0.0</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="site-layout" id="site">
+      <aside class="menu p-3">
+        <p class="menu-label">General</p>
+        <ul class="menu-list has-site-branding">
+          <li><a href="./" class="is-active">Home</a><a href="software-systems/" class="">Software Systems</a><a href="data-model/" class="">Data Model</a></li>
+        </ul>
+        <p class="menu-label">Software systems</p>
+        <ul class="menu-list has-site-branding">
+          <li><a href="analytics-module/" class="">Analytics Module</a><a href="configurations-module/" class="">Configurations Module</a><a href="database-module/" class="">Database Module</a><a href="e-commerce/" class="">E-Commerce</a><a href="inventory-module/" class="">Inventory Module</a><a href="layout-module/" class="">Layout Module</a><a href="missions-module/" class="">Missions Module</a><a href="picking-module/" class="">Picking Module</a><a href="reception-module/" class="">Reception Module</a><a href="shipping-module/" class="">Shipping Module</a></li>
+        </ul>
+      </aside>
+      <div class="container is-fluid has-background-white">
+        <div class="content p-3">
+          <div><div class="sect1 content">
+ <h2 id="_overview">Overview</h2>
+ <div class="sectionbody">
+  <div class="paragraph content">
+   <p>Here is a complete overview of the architecture. To navigate over it, just click on whichever box you want to know more about, or just look for it on the sidebar. You can also click on the caption to get a dedicated view.</p>
+  </div>
+  <div class="imageblock content">
+   <div class="content">
+    <div>
+     <figure style="width: min(100%, 1426px);">
+      <div>
+       <!--?xml version="1.0" encoding="us-ascii" standalone="no"?-->
+       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" preserveAspectRatio="meet" version="1.1" viewBox="0 0 1426 1347" zoomAndPan="magnify">
+        <defs /><g>
+         <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="131" x="640.5" y="23.5352">System Landscape</text><!--cluster group_1-->
+         <g id="cluster_group_1">
+          <rect fill="none" height="139.84" rx="2.5" ry="2.5" style="stroke:#CCCCCC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="619" x="801" y="232.3383" />
+          <text fill="#CCCCCC" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="174" x="1023.5" y="249.807">Operation Employees</text>
+         </g><!--cluster group_2-->
+         <g id="cluster_group_2">
+          <rect fill="none" height="139.85" rx="2.5" ry="2.5" style="stroke:#CCCCCC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="536" x="104" y="44.4883" />
+          <text fill="#CCCCCC" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="166" x="289" y="61.957">Operation Managers</text>
+         </g><!--entity ReceivingEmployee-->
+         <g id="elem_ReceivingEmployee">
+          <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="183" x="817.5" y="269.3383" />
+          <image height="48" width="48" x="885" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="279.3383" />
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="79" x="827.5" y="342.807">Receiving</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="906.5" y="342.807">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="79" x="911.5" y="342.807">Employee</text>
+         </g><!--entity PickingEmployee-->
+         <g id="elem_PickingEmployee">
+          <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="165" x="1035.5" y="269.3383" />
+          <image height="48" width="48" x="1094" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="279.3383" />
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1045.5" y="342.807">Picking</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1106.5" y="342.807">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="79" x="1111.5" y="342.807">Employee</text>
+         </g><!--entity PackingEmployee-->
+         <g id="elem_PackingEmployee">
+          <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="169" x="1235.5" y="269.3383" />
+          <image height="48" width="48" x="1296" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="279.3383" />
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="65" x="1245.5" y="342.807">Packing</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1310.5" y="342.807">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="79" x="1315.5" y="342.807">Employee</text>
+         </g><!--entity Administrator-->
+         <g id="elem_Administrator">
+          <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="134" x="305" y="81.4883" />
+          <image height="48" width="48" x="348" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="91.4883" />
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="114" x="315" y="154.957">Administrator</text>
+         </g><!--entity LogisticAnalyst-->
+         <g id="elem_LogisticAnalyst">
+          <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="150" x="120" y="81.4883" />
+          <image height="48" width="48" x="171" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="91.4883" />
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="64" x="130" y="154.957">Logistic</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="194" y="154.957">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="199" y="154.957">Analyst</text>
+         </g><!--entity LayoutManager-->
+         <g id="elem_LayoutManager">
+          <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="150" x="474" y="81.4883" />
+          <image height="48" width="48" x="525" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="91.4883" />
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="54" x="484" y="154.957">Layout</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="538" y="154.957">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="71" x="543" y="154.957">Manager</text>
+         </g><!--entity ReceptionModule-->
+         <g id="elem_ReceptionModule">
+          <a href="reception-module/context/" target="_self" title="reception-module/context/" xlink:actuate="onRequest" xlink:href="reception-module/context/" xlink:show="new" xlink:title="reception-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="167" x="572.5" y="450.7583" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="81" x="582.5" y="476.227">Reception</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="663.5" y="476.227">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="668.5" y="476.227">Module</text>
+          </a>
+         </g><!--entity LayoutModule-->
+         <g id="elem_LayoutModule">
+          <a href="layout-module/context/" target="_self" title="layout-module/context/" xlink:actuate="onRequest" xlink:href="layout-module/context/" xlink:show="new" xlink:title="layout-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="140" x="774" y="450.7583" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="54" x="784" y="476.227">Layout</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="838" y="476.227">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="843" y="476.227">Module</text>
+          </a>
+         </g><!--entity PickingModule-->
+         <g id="elem_PickingModule">
+          <a href="picking-module/context/" target="_self" title="picking-module/context/" xlink:actuate="onRequest" xlink:href="picking-module/context/" xlink:show="new" xlink:title="picking-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="147" x="1119.5" y="996.7083" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1129.5" y="1022.177">Picking</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1190.5" y="1022.177">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1195.5" y="1022.177">Module</text>
+          </a>
+         </g><!--entity ShippingModule-->
+         <g id="elem_ShippingModule">
+          <a href="shipping-module/context/" target="_self" title="shipping-module/context/" xlink:actuate="onRequest" xlink:href="shipping-module/context/" xlink:show="new" xlink:title="shipping-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="160" x="950" y="1125.5583" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="74" x="960" y="1151.027">Shipping</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1034" y="1151.027">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1039" y="1151.027">Module</text>
+          </a>
+         </g><!--entity AnalyticsModule-->
+         <g id="elem_AnalyticsModule">
+          <a href="analytics-module/context/" target="_self" title="analytics-module/context/" xlink:actuate="onRequest" xlink:href="analytics-module/context/" xlink:show="new" xlink:title="analytics-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="161" x="122.5" y="996.7083" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="75" x="132.5" y="1022.177">Analytics</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="207.5" y="1022.177">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="212.5" y="1022.177">Module</text>
+          </a>
+         </g><!--entity ConfigurationsModule-->
+         <g id="elem_ConfigurationsModule">
+          <a href="configurations-module/context/" target="_self" title="configurations-module/context/" xlink:actuate="onRequest" xlink:href="configurations-module/context/" xlink:show="new" xlink:title="configurations-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="209" x="267.5" y="293.3383" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="123" x="277.5" y="318.807">Configurations</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="400.5" y="318.807">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="405.5" y="318.807">Module</text>
+          </a>
+         </g><!--entity ECommerce-->
+         <g id="elem_ECommerce">
+          <a href="e-commerce/context/" target="_self" title="e-commerce/context/" xlink:actuate="onRequest" xlink:href="e-commerce/context/" xlink:show="new" xlink:title="e-commerce/context/" xlink:type="simple">
+           <rect fill="#D0A7FF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#9174B2;stroke-width:0.5;" width="127" x="361.5" y="582.1783" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="107" x="371.5" y="607.647">E-Commerce</text>
+          </a>
+         </g><!--entity DatabaseModule-->
+         <g id="elem_DatabaseModule">
+          <a href="database-module/context/" target="_self" title="database-module/context/" xlink:actuate="onRequest" xlink:href="database-module/context/" xlink:show="new" xlink:title="database-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="161" x="571.5" y="582.1783" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="75" x="581.5" y="607.647">Database</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="656.5" y="607.647">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="661.5" y="607.647">Module</text>
+          </a>
+         </g><!--entity MissionsModule-->
+         <g id="elem_MissionsModule">
+          <a href="missions-module/context/" target="_self" title="missions-module/context/" xlink:actuate="onRequest" xlink:href="missions-module/context/" xlink:show="new" xlink:title="missions-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="159" x="885.5" y="867.8683" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="73" x="895.5" y="893.337">Missions</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="968.5" y="893.337">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="973.5" y="893.337">Module</text>
+          </a>
+         </g><!--entity InventoryModule-->
+         <g id="elem_InventoryModule">
+          <a href="inventory-module/context/" target="_self" title="inventory-module/context/" xlink:actuate="onRequest" xlink:href="inventory-module/context/" xlink:show="new" xlink:title="inventory-module/context/" xlink:type="simple">
+           <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="163" x="424.5" y="725.0183" />
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="77" x="434.5" y="750.487">Inventory</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="511.5" y="750.487">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="516.5" y="750.487">Module</text>
+          </a>
+         </g><!--link PackingEmployee to ShippingModule-->
+         <g id="link_PackingEmployee_ShippingModule">
+          <path d="M1320,356.6383 C1320,387.8483 1320,431.1383 1320,469.1783 C1320,469.1783 1320,469.1783 1320,1017.1283 C1320,1109.0383 1204.1939,1134.3525 1118.3739,1141.3025 " fill="none" id="PackingEmployee-to-ShippingModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="1110.4,1141.9483,1118.6161,1144.2927,1118.1317,1138.3123,1110.4,1141.9483" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="52" x="1321" y="749.0498">Finishes</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1373" y="749.0498">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="40" x="1377" y="749.0498">orders</text>
+         </g><!--link ShippingModule to DatabaseModule-->
+         <g id="link_ShippingModule_DatabaseModule">
+          <path d="M949.85,1140.8783 C866.8,1132.8583 749,1105.8483 749,1017.1283 C749,814.8683 749,814.8683 749,814.8683 C749,760.8683 764.54,748.8383 769,695.0183 C770.62,675.5383 779.87,667.2783 769,651.0183 C760.2,637.8683 754.2863,631.7935 739.9963,624.8035 " fill="none" id="ShippingModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="732.81,621.2883,738.6781,627.4984,741.3145,622.1086,732.81,621.2883" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="753" y="884.8898">Retrieve</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="803" y="884.8898">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="40" x="807" y="884.8898">orders</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="750" y="899.0227">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="804" y="899.0227">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="808" y="899.0227">Broker]</text>
+         </g><!--link ShippingModule to MissionsModule-->
+         <g id="link_ShippingModule_MissionsModule">
+          <path d="M1018.41,1125.2083 C1006.08,1104.2083 987.11,1068.7783 978,1035.5583 C965.65,990.5083 964.2221,943.078 964.4621,914.798 " fill="none" id="ShippingModule-to-MissionsModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="964.53,906.7983,961.4622,914.7725,967.462,914.8235,964.53,906.7983" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="48" x="979" y="1013.7298">Accepts</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1027" y="1013.7298">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="70" x="1031" y="1013.7298">completion</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="990" y="1027.8627">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="1044" y="1027.8627">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="1048" y="1027.8627">Broker]</text>
+         </g><!--link PickingEmployee to PickingModule-->
+         <g id="link_PickingEmployee_PickingModule">
+          <path d="M1154.47,356.5883 C1175.97,386.2183 1199,427.6483 1199,469.1783 C1199,469.1783 1199,469.1783 1199,888.2883 C1199,926.6483 1196.8032,963.4788 1195.0232,988.2588 " fill="none" id="PickingEmployee-to-PickingModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="1194.45,996.2383,1198.0155,988.4738,1192.0309,988.0439,1194.45,996.2383" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1200" y="677.6198">Navigates</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1261" y="677.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="27" x="1265" y="677.6198">with</text>
+         </g><!--link MissionsModule to PickingModule-->
+         <g id="link_MissionsModule_PickingModule">
+          <path d="M980.13,906.9083 C995.35,924.5483 1020.33,950.6683 1047,966.7083 C1069.08,979.9983 1087.6218,987.7695 1111.6718,995.2595 " fill="none" id="MissionsModule-to-PickingModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="1119.31,997.6383,1112.5639,992.3952,1110.7798,998.1238,1119.31,997.6383" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="30" x="1048" y="949.3098">Send</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1078" y="949.3098">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="7" x="1082" y="949.3098">a</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1089" y="949.3098">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="25" x="1093" y="949.3098">new</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1118" y="949.3098">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="1122" y="949.3098">mission</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="1060" y="963.4427">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="1114" y="963.4427">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="1118" y="963.4427">Broker]</text>
+         </g><!--link PickingModule to ShippingModule-->
+         <g id="link_PickingModule_ShippingModule">
+          <path d="M1168.95,1035.8483 C1138.13,1059.8283 1091.3338,1096.2555 1060.4638,1120.2755 " fill="none" id="PickingModule-to-ShippingModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="1054.15,1125.1883,1062.3061,1122.6432,1058.6215,1117.9078,1054.15,1125.1883" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="24" x="1127" y="1078.1598">Ask</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1151" y="1078.1598">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1155" y="1078.1598">for</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1173" y="1078.1598">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="62" x="1177" y="1078.1598">validation</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="1133" y="1092.2927">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="1187" y="1092.2927">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="1191" y="1092.2927">Broker]</text>
+         </g><!--link ReceivingEmployee to ReceptionModule-->
+         <g id="link_ReceivingEmployee_ReceptionModule">
+          <path d="M839.2,356.6383 C789.18,387.3683 731.0569,423.0714 693.4469,446.1714 " fill="none" id="ReceivingEmployee-to-ReceptionModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="686.63,450.3583,695.017,448.7277,691.8768,443.615,686.63,450.3583" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="26" x="783" y="407.7798">Fills</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="809" y="407.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="7" x="813" y="407.7798">a</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="820" y="407.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="30" x="824" y="407.7798">form</text>
+         </g><!--link ReceptionModule to DatabaseModule-->
+         <g id="link_ReceptionModule_DatabaseModule">
+          <path d="M655.42,489.9983 C654.66,514.5383 653.5875,549.2121 652.8275,573.7621 " fill="none" id="ReceptionModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="652.58,581.7583,655.8261,573.8549,649.829,573.6693,652.58,581.7583" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="655" y="534.7798">Sends</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="692" y="534.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="25" x="696" y="534.7798">new</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="721" y="534.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="40" x="725" y="534.7798">values</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="660" y="548.9127">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="714" y="548.9127">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="718" y="548.9127">Broker]</text>
+         </g><!--link Administrator to ConfigurationsModule-->
+         <g id="link_Administrator_ConfigurationsModule">
+          <path d="M372,168.5483 C372,207.7683 372,256.0983 372,285.0283 " fill="none" id="Administrator-to-ConfigurationsModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="372,293.0283,375,285.0283,369,285.0283,372,293.0283" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="373" y="212.9398">Make</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="406" y="212.9398">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="51" x="410" y="212.9398">changes</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="461" y="212.9398">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="27" x="465" y="212.9398">with</text>
+         </g><!--link ConfigurationsModule to DatabaseModule-->
+         <g id="link_ConfigurationsModule_DatabaseModule">
+          <path d="M376.32,332.6683 C385.2,367.8983 408.52,444.3483 453,492.1783 C492.65,534.8183 545.5322,561.4523 589.3622,578.8123 " fill="none" id="ConfigurationsModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="596.8,581.7583,590.4669,576.0231,588.2574,581.6015,596.8,581.7583" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="47" x="468.5" y="460.7798">Change</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="515.5" y="460.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="519.5" y="460.7798">the</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="84" x="462" y="474.9127">configuration</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="454" y="489.0455">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="508" y="489.0455">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="512" y="489.0455">Broker]</text>
+         </g><!--link ConfigurationsModule to AnalyticsModule-->
+         <g id="link_ConfigurationsModule_AnalyticsModule">
+          <path d="M289.85,332.6583 C222.77,353.5283 139,394.5383 139,469.1783 C139,469.1783 139,469.1783 139,888.2883 C139,930.4683 162.5392,966.67 181.4992,990.19 " fill="none" id="ConfigurationsModule-to-AnalyticsModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="186.52,996.4183,183.8348,988.3072,179.1636,992.0728,186.52,996.4183" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="140" y="670.6198">Update</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="184" y="670.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="188" y="670.6198">schedule</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="143" y="684.7527">[HTTPS</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="185" y="684.7527">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="51" x="189" y="684.7527">Request]</text>
+         </g><!--link ConfigurationsModule to InventoryModule-->
+         <g id="link_ConfigurationsModule_InventoryModule">
+          <path d="M363,332.5283 C335.64,392.6283 260.41,582.9583 347,695.0183 C365.44,718.8883 387.5075,729.6163 416.4075,735.9863 " fill="none" id="ConfigurationsModule-to-InventoryModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="424.22,737.7083,417.0533,733.0566,415.7618,738.916,424.22,737.7083" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="309" y="534.7798">Update</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="353" y="534.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="357" y="534.7798">schedule</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="312" y="548.9127">[HTTPS</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="354" y="548.9127">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="51" x="358" y="548.9127">Request]</text>
+         </g><!--link ConfigurationsModule to ReceptionModule-->
+         <g id="link_ConfigurationsModule_ReceptionModule">
+          <path d="M393.84,332.4283 C421.19,355.0783 470.14,393.3083 517,418.1783 C541.07,430.9483 561.4759,439.2836 585.9859,447.7236 " fill="none" id="ConfigurationsModule-to-ReceptionModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="593.55,450.3283,586.9627,444.8871,585.0091,450.5601,593.55,450.3283" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="518" y="400.7798">Update</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="562" y="400.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="566" y="400.7798">schedule</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="519.5" y="414.9127">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="573.5" y="414.9127">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="577.5" y="414.9127">Broker]</text>
+         </g><!--link MissionsModule to DatabaseModule-->
+         <g id="link_MissionsModule_DatabaseModule">
+          <path d="M946.75,867.6483 C924.98,844.6883 888.47,803.8083 864,763.8683 C835.43,717.2483 855.93,687.2783 815,651.0183 C792.24,630.8583 769.19,620.9514 740.46,614.0714 " fill="none" id="MissionsModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="732.68,612.2083,739.7614,616.9889,741.1587,611.1539,732.68,612.2083" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="51" x="865" y="742.0498">Updates</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="916" y="742.0498">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="920" y="742.0498">the</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="940" y="742.0498">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="944" y="742.0498">status</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="874" y="756.1827">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="928" y="756.1827">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="932" y="756.1827">Broker]</text>
+         </g><!--link InventoryModule to MissionsModule-->
+         <g id="link_InventoryModule_MissionsModule">
+          <path d="M540.55,764.2883 C580.16,785.1483 647.54,818.3783 709,837.8683 C725.73,843.1783 808.4454,858.4375 877.1554,870.7475 " fill="none" id="InventoryModule-to-MissionsModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="885.03,872.1583,877.6844,867.7945,876.6263,873.7005,885.03,872.1583" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="40" x="710.5" y="806.4698">Create</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="750.5" y="806.4698">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="754.5" y="806.4698">counting</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="57" x="731.5" y="820.6027">missions</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="710" y="834.7355">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="764" y="834.7355">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="768" y="834.7355">Broker]</text>
+         </g><!--link DatabaseModule to InventoryModule-->
+         <g id="link_DatabaseModule_InventoryModule">
+          <path d="M647.37,621.4883 C641.51,641.9183 629.61,674.3383 609,695.0183 C596.52,707.5483 587.4567,713.9141 571.4767,721.2141 " fill="none" id="DatabaseModule-to-InventoryModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="564.2,724.5383,572.7232,723.9429,570.2301,718.4854,564.2,724.5383" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="637" y="663.6198">Retrieve</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="687" y="663.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="42" x="691" y="663.6198">Layout</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="733" y="663.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="23" x="737" y="663.6198">and</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="682" y="677.7527">Units</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="648.5" y="691.8855">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="702.5" y="691.8855">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="706.5" y="691.8855">Broker]</text>
+         </g><!--link InventoryModule to DatabaseModule-->
+         <g id="link_InventoryModule_DatabaseModule">
+          <path d="M498.03,724.8283 C490.75,704.6483 483.31,672.4483 499,651.0183 C515.87,627.9883 535.9783,617.4842 563.3583,610.9542 " fill="none" id="InventoryModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="571.14,609.0983,562.6623,608.036,564.0542,613.8723,571.14,609.0983" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="501" y="670.6198">Sends</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="538" y="670.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="542" y="670.6198">the</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="562" y="670.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="566" y="670.6198">order</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="500" y="684.7527">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="554" y="684.7527">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="558" y="684.7527">Broker]</text>
+         </g><!--link ECommerce to InventoryModule-->
+         <g id="link_ECommerce_InventoryModule">
+          <path d="M390.01,621.4183 C379.33,629.0783 368.87,638.9983 363,651.0183 C354.43,668.5983 351.6,679.1283 363,695.0183 C377.44,715.1483 393.0265,724.7562 416.6365,731.7162 " fill="none" id="ECommerce-to-InventoryModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="424.31,733.9783,417.4848,728.8386,415.7882,734.5938,424.31,733.9783" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="364" y="670.6198">Sends</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="401" y="670.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="405" y="670.6198">the</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="425" y="670.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="429" y="670.6198">order</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="364.5" y="684.7527">[HTTPS</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="406.5" y="684.7527">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="51" x="410.5" y="684.7527">Request]</text>
+         </g><!--link LogisticAnalyst to AnalyticsModule-->
+         <g id="link_LogisticAnalyst_AnalyticsModule">
+          <path d="M119.76,162.4783 C67.05,193.9183 6,244.7983 6,311.7583 C6,311.7583 6,311.7583 6,888.2883 C6,946.5583 60.0676,976.8783 114.4076,994.4383 " fill="none" id="LogisticAnalyst-to-AnalyticsModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="122.02,996.8983,115.3301,991.5837,113.4851,997.293,122.02,996.8983" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="51" x="8.5" y="599.1998">Watches</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="59.5" y="599.1998">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="63.5" y="599.1998">the</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="78" x="7" y="613.3327">performance</text>
+         </g><!--link DatabaseModule to AnalyticsModule-->
+         <g id="link_DatabaseModule_AnalyticsModule">
+          <path d="M571.38,613.3883 C484.01,625.3783 355.77,643.9883 347,651.0183 C233.5,742.0183 209.776,927.3444 204.836,988.3244 " fill="none" id="DatabaseModule-to-AnalyticsModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="204.19,996.2983,207.8262,988.5666,201.8458,988.0822,204.19,996.2983" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="57" x="249" y="813.4698">Retrieves</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="306" y="813.4698">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="310" y="813.4698">the</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="330" y="813.4698">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="27" x="334" y="813.4698">data</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="255" y="827.6027">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="309" y="827.6027">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="313" y="827.6027">Broker]</text>
+         </g><!--link MissionsModule to AnalyticsModule-->
+         <g id="link_MissionsModule_AnalyticsModule">
+          <path d="M885.14,902.2383 C876.32,903.7583 867.47,905.2783 859,906.7083 C651.87,941.8283 415.5858,980.5212 291.7258,1000.7112 " fill="none" id="MissionsModule-to-AnalyticsModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="283.83,1001.9983,292.2084,1003.6721,291.2431,997.7503,283.83,1001.9983" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="57" x="679" y="949.3098">Retrieves</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="736" y="949.3098">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="740" y="949.3098">the</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="760" y="949.3098">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="27" x="764" y="949.3098">data</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="685" y="963.4427">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="739" y="963.4427">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="743" y="963.4427">Broker]</text>
+         </g><!--link LayoutManager to LayoutModule-->
+         <g id="link_LayoutManager_LayoutModule">
+          <path d="M562.11,168.3883 C580.52,222.5883 618.37,316.8683 676,380.1783 C705.99,413.1283 743.6395,433.1139 779.5595,447.4439 " fill="none" id="LayoutManager-to-LayoutModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="786.99,450.4083,780.6711,444.6575,778.4478,450.2304,786.99,450.4083" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="47" x="677" y="310.3598">Creates</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="724" y="310.3598">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="13" x="728" y="310.3598">or</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="741" y="310.3598">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="745" y="310.3598">modifies</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="719" y="324.4927">layout</text>
+         </g><!--link LayoutModule to DatabaseModule-->
+         <g id="link_LayoutModule_DatabaseModule">
+          <path d="M831.84,489.8783 C819.26,507.9583 798.09,535.0583 774,552.1783 C756.63,564.5283 743.1585,571.4671 723.5485,578.9171 " fill="none" id="LayoutModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="716.07,581.7583,724.6139,581.7216,722.4831,576.1127,716.07,581.7583" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="807" y="534.7798">Sends</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="844" y="534.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="25" x="848" y="534.7798">new</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="873" y="534.7798">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="877" y="534.7798">layout</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="813" y="548.9127">[HTTPS</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="855" y="548.9127">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="51" x="859" y="548.9127">Request]</text>
+         </g><!--link LayoutModule to MissionsModule-->
+         <g id="link_LayoutModule_MissionsModule">
+          <path d="M885.88,489.9883 C900.01,498.1183 914.78,508.8683 925,522.1783 C982.51,597.0483 973.84,631.6883 988,725.0183 C995.81,776.4683 982.8502,829.6182 973.6302,859.7582 " fill="none" id="LayoutModule-to-MissionsModule" style="stroke:#000000;stroke-width:1.0;" />
+          <polygon fill="#000000" points="971.29,867.4083,976.499,860.6358,970.7614,858.8806,971.29,867.4083" style="stroke:#000000;stroke-width:1.0;" />
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="984" y="670.6198">Sends</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1021" y="670.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="1025" y="670.6198">updates</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1075" y="670.6198">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="52" x="1079" y="670.6198">required</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="1007.5" y="684.7527">[Message</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="1061.5" y="684.7527">&nbsp;</text>
+          <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="1065.5" y="684.7527">Broker]</text>
+         </g>
+         <rect fill="none" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1188.402" />
+         <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="51" x="1074" y="1201.9372">Legend</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1125" y="1201.9372">&nbsp;</text>
+         <rect fill="none" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1204.8903" />
+         <text fill="#444444" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1218.4255">▯</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1218.4255">&nbsp;</text>
+         <text fill="#444444" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="1094" y="1218.4255">boundary</text>
+         <text fill="#444444" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="41" x="1164" y="1219.2692">(dashed)</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1205" y="1218.4255">&nbsp;</text>
+         <rect fill="#F9D055" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1221.3786" />
+         <text fill="#AE913B" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1234.9138">▯</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1234.9138">&nbsp;</text>
+         <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="1094" y="1234.9138">Employee</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1164" y="1234.9138">&nbsp;</text>
+         <rect fill="#69BEFF" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1237.8669" />
+         <text fill="#4985B2" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1251.402">▯</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1251.402">&nbsp;</text>
+         <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="1094" y="1251.402">Context</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1153" y="1251.402">&nbsp;</text>
+         <rect fill="#D0A7FF" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1254.3552" />
+         <text fill="#9174B2" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1267.8903">▯</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1267.8903">&nbsp;</text>
+         <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="1094" y="1267.8903">External</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1155" y="1267.8903">&nbsp;</text>
+         <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="14" x="1078" y="1284.3786">─</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1092" y="1284.3786">&nbsp;</text>
+         <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="1100" y="1284.3786">Relationship</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1189" y="1284.3786">&nbsp;</text>
+         <rect fill="#66622E" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1287.3317" />
+         <text fill="#CCCCCC" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1300.8669">▯</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1300.8669">&nbsp;</text>
+         <text fill="#CCCCCC" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="216" x="1094" y="1300.8669">Operation Employees boundary</text>
+         <text fill="#CCCCCC" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="77" x="1314" y="1301.7106">(last back color)</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1391" y="1300.8669">&nbsp;</text>
+         <rect fill="#66622E" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1303.82" />
+         <text fill="#CCCCCC" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1317.3552">▯</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1317.3552">&nbsp;</text>
+         <text fill="#CCCCCC" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="210" x="1094" y="1317.3552">Operation Managers boundary</text>
+         <text fill="#CCCCCC" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="77" x="1308" y="1318.1989">(last back color)</text>
+         <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1385" y="1317.3552">&nbsp;</text>
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1188.402" y2="1188.402" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1204.8903" y2="1204.8903" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1221.3786" y2="1221.3786" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1237.8669" y2="1237.8669" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1254.3552" y2="1254.3552" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1270.8434" y2="1270.8434" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1287.3317" y2="1287.3317" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1303.82" y2="1303.82" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1320.3083" y2="1320.3083" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1074" y1="1188.402" y2="1320.3083" />
+         <line style="stroke:none;stroke-width:1.0;" x1="1395" x2="1395" y1="1188.402" y2="1320.3083" />
+        </g>
+       </svg>
+      </div>
+      <figcaption>
+       <a onclick="openModal('SystemLandscape-modal', 'SystemLandscape-svg')">Full Architecture</a>
+      </figcaption>
+     </figure>
+     <div class="modal" id="SystemLandscape-modal">
+      <div class="modal-background" onclick="closeModal('SystemLandscape-modal')"></div>
+      <div class="modal-content">
+       <div class="box">
+        <div id="SystemLandscape-svg" class="modal-box-content">
+         <!--?xml version="1.0" encoding="us-ascii" standalone="no"?-->
+         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" preserveAspectRatio="meet" version="1.1" viewBox="0 0 1426 1347" zoomAndPan="magnify">
+          <defs /><g>
+           <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="131" x="640.5" y="23.5352">System Landscape</text><!--cluster group_1-->
+           <g id="cluster_group_1">
+            <rect fill="none" height="139.84" rx="2.5" ry="2.5" style="stroke:#CCCCCC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="619" x="801" y="232.3383" />
+            <text fill="#CCCCCC" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="174" x="1023.5" y="249.807">Operation Employees</text>
+           </g><!--cluster group_2-->
+           <g id="cluster_group_2">
+            <rect fill="none" height="139.85" rx="2.5" ry="2.5" style="stroke:#CCCCCC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="536" x="104" y="44.4883" />
+            <text fill="#CCCCCC" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="166" x="289" y="61.957">Operation Managers</text>
+           </g><!--entity ReceivingEmployee-->
+           <g id="elem_ReceivingEmployee">
+            <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="183" x="817.5" y="269.3383" />
+            <image height="48" width="48" x="885" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="279.3383" />
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="79" x="827.5" y="342.807">Receiving</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="906.5" y="342.807">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="79" x="911.5" y="342.807">Employee</text>
+           </g><!--entity PickingEmployee-->
+           <g id="elem_PickingEmployee">
+            <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="165" x="1035.5" y="269.3383" />
+            <image height="48" width="48" x="1094" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="279.3383" />
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1045.5" y="342.807">Picking</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1106.5" y="342.807">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="79" x="1111.5" y="342.807">Employee</text>
+           </g><!--entity PackingEmployee-->
+           <g id="elem_PackingEmployee">
+            <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="169" x="1235.5" y="269.3383" />
+            <image height="48" width="48" x="1296" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="279.3383" />
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="65" x="1245.5" y="342.807">Packing</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1310.5" y="342.807">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="79" x="1315.5" y="342.807">Employee</text>
+           </g><!--entity Administrator-->
+           <g id="elem_Administrator">
+            <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="134" x="305" y="81.4883" />
+            <image height="48" width="48" x="348" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="91.4883" />
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="114" x="315" y="154.957">Administrator</text>
+           </g><!--entity LogisticAnalyst-->
+           <g id="elem_LogisticAnalyst">
+            <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="150" x="120" y="81.4883" />
+            <image height="48" width="48" x="171" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="91.4883" />
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="64" x="130" y="154.957">Logistic</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="194" y="154.957">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="199" y="154.957">Analyst</text>
+           </g><!--entity LayoutManager-->
+           <g id="elem_LayoutManager">
+            <rect fill="#F9D055" height="86.8438" rx="2.5" ry="2.5" style="stroke:#AE913B;stroke-width:0.5;" width="150" x="474" y="81.4883" />
+            <image height="48" width="48" x="525" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACN0lEQVR4Xu2Yvy5FQRCHT6USiUpDcytRKGioFEShkuAFRK9SKiUSvcQL8ATiATQKhdIreATVkU9ykpv5OXtm/7jHJoovkd91dmd2Zmdnt/l8O2lqRoTaECGXp7ud9ux40u5uLbUba4vfHO2vtFfn6+3748G1/f9cREjl9nKzXVyYa5umCYJjLw97r/b7VESI5eP5cI9VtoYOQUTsWCmIEAPGe1a9j4vT1WwnRIghZeUtpJ4dNwYRvJAC1phUiKQd34sIHpjQGpEDVcvO4UUED4TdGpGLncOLCB4ohdaAXDg/7DweRPCQU3n6SC2rIniwk5cgtaSK4MFOXoKZOjBZnhcDckk9D0TwQHNmDchlppu4dBmlKNg5vIjgpWQlSs1/EMFL1a1ER4kD7f5mO3n1QYQYWLmcipR6eE0jQgopkchd+Q4RUsEgTzQowTk5bxEhF+67pAaGEhmgXab0ljS8Q4TaEKE2RPDA+w45T6pwCEHMUwnfdt+RWrQRqeklQggMDm1UfuvyHaNwCvibb4eqFb/H9kQi/ASDlmwdhsARb0REsJRsGWIgmp6nSBGmKd11xkLUhyIhQge5awccA9LJ2uZyYGjDzZJQ2yEC/JXV72A/WBuDDlAK7SBj07ehRYBQrR+Lvku/CN/iDwOMTd+1U4TSD7eloLu1tlblQF85FeHfgV+iegfcewBm2Xl66XvBEAHGbuIsoaZOhA7qrh1oDDhUQ7c9EabBay4zNFNjEDLc5UANiFAbXxHj75WvE7U5AAAAAElFTkSuQmCC" y="91.4883" />
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="54" x="484" y="154.957">Layout</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="538" y="154.957">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="71" x="543" y="154.957">Manager</text>
+           </g><!--entity ReceptionModule-->
+           <g id="elem_ReceptionModule">
+            <a href="reception-module/context/" target="_self" title="reception-module/context/" xlink:actuate="onRequest" xlink:href="reception-module/context/" xlink:show="new" xlink:title="reception-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="167" x="572.5" y="450.7583" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="81" x="582.5" y="476.227">Reception</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="663.5" y="476.227">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="668.5" y="476.227">Module</text>
+            </a>
+           </g><!--entity LayoutModule-->
+           <g id="elem_LayoutModule">
+            <a href="layout-module/context/" target="_self" title="layout-module/context/" xlink:actuate="onRequest" xlink:href="layout-module/context/" xlink:show="new" xlink:title="layout-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="140" x="774" y="450.7583" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="54" x="784" y="476.227">Layout</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="838" y="476.227">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="843" y="476.227">Module</text>
+            </a>
+           </g><!--entity PickingModule-->
+           <g id="elem_PickingModule">
+            <a href="picking-module/context/" target="_self" title="picking-module/context/" xlink:actuate="onRequest" xlink:href="picking-module/context/" xlink:show="new" xlink:title="picking-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="147" x="1119.5" y="996.7083" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1129.5" y="1022.177">Picking</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1190.5" y="1022.177">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1195.5" y="1022.177">Module</text>
+            </a>
+           </g><!--entity ShippingModule-->
+           <g id="elem_ShippingModule">
+            <a href="shipping-module/context/" target="_self" title="shipping-module/context/" xlink:actuate="onRequest" xlink:href="shipping-module/context/" xlink:show="new" xlink:title="shipping-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="160" x="950" y="1125.5583" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="74" x="960" y="1151.027">Shipping</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="1034" y="1151.027">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1039" y="1151.027">Module</text>
+            </a>
+           </g><!--entity AnalyticsModule-->
+           <g id="elem_AnalyticsModule">
+            <a href="analytics-module/context/" target="_self" title="analytics-module/context/" xlink:actuate="onRequest" xlink:href="analytics-module/context/" xlink:show="new" xlink:title="analytics-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="161" x="122.5" y="996.7083" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="75" x="132.5" y="1022.177">Analytics</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="207.5" y="1022.177">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="212.5" y="1022.177">Module</text>
+            </a>
+           </g><!--entity ConfigurationsModule-->
+           <g id="elem_ConfigurationsModule">
+            <a href="configurations-module/context/" target="_self" title="configurations-module/context/" xlink:actuate="onRequest" xlink:href="configurations-module/context/" xlink:show="new" xlink:title="configurations-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="209" x="267.5" y="293.3383" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="123" x="277.5" y="318.807">Configurations</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="400.5" y="318.807">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="405.5" y="318.807">Module</text>
+            </a>
+           </g><!--entity ECommerce-->
+           <g id="elem_ECommerce">
+            <a href="e-commerce/context/" target="_self" title="e-commerce/context/" xlink:actuate="onRequest" xlink:href="e-commerce/context/" xlink:show="new" xlink:title="e-commerce/context/" xlink:type="simple">
+             <rect fill="#D0A7FF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#9174B2;stroke-width:0.5;" width="127" x="361.5" y="582.1783" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="107" x="371.5" y="607.647">E-Commerce</text>
+            </a>
+           </g><!--entity DatabaseModule-->
+           <g id="elem_DatabaseModule">
+            <a href="database-module/context/" target="_self" title="database-module/context/" xlink:actuate="onRequest" xlink:href="database-module/context/" xlink:show="new" xlink:title="database-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="161" x="571.5" y="582.1783" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="75" x="581.5" y="607.647">Database</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="656.5" y="607.647">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="661.5" y="607.647">Module</text>
+            </a>
+           </g><!--entity MissionsModule-->
+           <g id="elem_MissionsModule">
+            <a href="missions-module/context/" target="_self" title="missions-module/context/" xlink:actuate="onRequest" xlink:href="missions-module/context/" xlink:show="new" xlink:title="missions-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="159" x="885.5" y="867.8683" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="73" x="895.5" y="893.337">Missions</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="968.5" y="893.337">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="973.5" y="893.337">Module</text>
+            </a>
+           </g><!--entity InventoryModule-->
+           <g id="elem_InventoryModule">
+            <a href="inventory-module/context/" target="_self" title="inventory-module/context/" xlink:actuate="onRequest" xlink:href="inventory-module/context/" xlink:show="new" xlink:title="inventory-module/context/" xlink:type="simple">
+             <rect fill="#69BEFF" height="38.8438" rx="2.5" ry="2.5" style="stroke:#4985B2;stroke-width:0.5;" width="163" x="424.5" y="725.0183" />
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="77" x="434.5" y="750.487">Inventory</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="5" x="511.5" y="750.487">&nbsp;</text>
+             <text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="61" x="516.5" y="750.487">Module</text>
+            </a>
+           </g><!--link PackingEmployee to ShippingModule-->
+           <g id="link_PackingEmployee_ShippingModule">
+            <path d="M1320,356.6383 C1320,387.8483 1320,431.1383 1320,469.1783 C1320,469.1783 1320,469.1783 1320,1017.1283 C1320,1109.0383 1204.1939,1134.3525 1118.3739,1141.3025 " fill="none" id="PackingEmployee-to-ShippingModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="1110.4,1141.9483,1118.6161,1144.2927,1118.1317,1138.3123,1110.4,1141.9483" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="52" x="1321" y="749.0498">Finishes</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1373" y="749.0498">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="40" x="1377" y="749.0498">orders</text>
+           </g><!--link ShippingModule to DatabaseModule-->
+           <g id="link_ShippingModule_DatabaseModule">
+            <path d="M949.85,1140.8783 C866.8,1132.8583 749,1105.8483 749,1017.1283 C749,814.8683 749,814.8683 749,814.8683 C749,760.8683 764.54,748.8383 769,695.0183 C770.62,675.5383 779.87,667.2783 769,651.0183 C760.2,637.8683 754.2863,631.7935 739.9963,624.8035 " fill="none" id="ShippingModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="732.81,621.2883,738.6781,627.4984,741.3145,622.1086,732.81,621.2883" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="753" y="884.8898">Retrieve</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="803" y="884.8898">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="40" x="807" y="884.8898">orders</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="750" y="899.0227">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="804" y="899.0227">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="808" y="899.0227">Broker]</text>
+           </g><!--link ShippingModule to MissionsModule-->
+           <g id="link_ShippingModule_MissionsModule">
+            <path d="M1018.41,1125.2083 C1006.08,1104.2083 987.11,1068.7783 978,1035.5583 C965.65,990.5083 964.2221,943.078 964.4621,914.798 " fill="none" id="ShippingModule-to-MissionsModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="964.53,906.7983,961.4622,914.7725,967.462,914.8235,964.53,906.7983" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="48" x="979" y="1013.7298">Accepts</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1027" y="1013.7298">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="70" x="1031" y="1013.7298">completion</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="990" y="1027.8627">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="1044" y="1027.8627">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="1048" y="1027.8627">Broker]</text>
+           </g><!--link PickingEmployee to PickingModule-->
+           <g id="link_PickingEmployee_PickingModule">
+            <path d="M1154.47,356.5883 C1175.97,386.2183 1199,427.6483 1199,469.1783 C1199,469.1783 1199,469.1783 1199,888.2883 C1199,926.6483 1196.8032,963.4788 1195.0232,988.2588 " fill="none" id="PickingEmployee-to-PickingModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="1194.45,996.2383,1198.0155,988.4738,1192.0309,988.0439,1194.45,996.2383" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="61" x="1200" y="677.6198">Navigates</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1261" y="677.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="27" x="1265" y="677.6198">with</text>
+           </g><!--link MissionsModule to PickingModule-->
+           <g id="link_MissionsModule_PickingModule">
+            <path d="M980.13,906.9083 C995.35,924.5483 1020.33,950.6683 1047,966.7083 C1069.08,979.9983 1087.6218,987.7695 1111.6718,995.2595 " fill="none" id="MissionsModule-to-PickingModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="1119.31,997.6383,1112.5639,992.3952,1110.7798,998.1238,1119.31,997.6383" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="30" x="1048" y="949.3098">Send</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1078" y="949.3098">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="7" x="1082" y="949.3098">a</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1089" y="949.3098">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="25" x="1093" y="949.3098">new</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1118" y="949.3098">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="1122" y="949.3098">mission</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="1060" y="963.4427">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="1114" y="963.4427">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="1118" y="963.4427">Broker]</text>
+           </g><!--link PickingModule to ShippingModule-->
+           <g id="link_PickingModule_ShippingModule">
+            <path d="M1168.95,1035.8483 C1138.13,1059.8283 1091.3338,1096.2555 1060.4638,1120.2755 " fill="none" id="PickingModule-to-ShippingModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="1054.15,1125.1883,1062.3061,1122.6432,1058.6215,1117.9078,1054.15,1125.1883" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="24" x="1127" y="1078.1598">Ask</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1151" y="1078.1598">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1155" y="1078.1598">for</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1173" y="1078.1598">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="62" x="1177" y="1078.1598">validation</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="1133" y="1092.2927">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="1187" y="1092.2927">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="1191" y="1092.2927">Broker]</text>
+           </g><!--link ReceivingEmployee to ReceptionModule-->
+           <g id="link_ReceivingEmployee_ReceptionModule">
+            <path d="M839.2,356.6383 C789.18,387.3683 731.0569,423.0714 693.4469,446.1714 " fill="none" id="ReceivingEmployee-to-ReceptionModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="686.63,450.3583,695.017,448.7277,691.8768,443.615,686.63,450.3583" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="26" x="783" y="407.7798">Fills</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="809" y="407.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="7" x="813" y="407.7798">a</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="820" y="407.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="30" x="824" y="407.7798">form</text>
+           </g><!--link ReceptionModule to DatabaseModule-->
+           <g id="link_ReceptionModule_DatabaseModule">
+            <path d="M655.42,489.9983 C654.66,514.5383 653.5875,549.2121 652.8275,573.7621 " fill="none" id="ReceptionModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="652.58,581.7583,655.8261,573.8549,649.829,573.6693,652.58,581.7583" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="655" y="534.7798">Sends</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="692" y="534.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="25" x="696" y="534.7798">new</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="721" y="534.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="40" x="725" y="534.7798">values</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="660" y="548.9127">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="714" y="548.9127">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="718" y="548.9127">Broker]</text>
+           </g><!--link Administrator to ConfigurationsModule-->
+           <g id="link_Administrator_ConfigurationsModule">
+            <path d="M372,168.5483 C372,207.7683 372,256.0983 372,285.0283 " fill="none" id="Administrator-to-ConfigurationsModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="372,293.0283,375,285.0283,369,285.0283,372,293.0283" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="373" y="212.9398">Make</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="406" y="212.9398">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="51" x="410" y="212.9398">changes</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="461" y="212.9398">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="27" x="465" y="212.9398">with</text>
+           </g><!--link ConfigurationsModule to DatabaseModule-->
+           <g id="link_ConfigurationsModule_DatabaseModule">
+            <path d="M376.32,332.6683 C385.2,367.8983 408.52,444.3483 453,492.1783 C492.65,534.8183 545.5322,561.4523 589.3622,578.8123 " fill="none" id="ConfigurationsModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="596.8,581.7583,590.4669,576.0231,588.2574,581.6015,596.8,581.7583" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="47" x="468.5" y="460.7798">Change</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="515.5" y="460.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="519.5" y="460.7798">the</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="84" x="462" y="474.9127">configuration</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="454" y="489.0455">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="508" y="489.0455">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="512" y="489.0455">Broker]</text>
+           </g><!--link ConfigurationsModule to AnalyticsModule-->
+           <g id="link_ConfigurationsModule_AnalyticsModule">
+            <path d="M289.85,332.6583 C222.77,353.5283 139,394.5383 139,469.1783 C139,469.1783 139,469.1783 139,888.2883 C139,930.4683 162.5392,966.67 181.4992,990.19 " fill="none" id="ConfigurationsModule-to-AnalyticsModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="186.52,996.4183,183.8348,988.3072,179.1636,992.0728,186.52,996.4183" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="140" y="670.6198">Update</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="184" y="670.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="188" y="670.6198">schedule</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="143" y="684.7527">[HTTPS</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="185" y="684.7527">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="51" x="189" y="684.7527">Request]</text>
+           </g><!--link ConfigurationsModule to InventoryModule-->
+           <g id="link_ConfigurationsModule_InventoryModule">
+            <path d="M363,332.5283 C335.64,392.6283 260.41,582.9583 347,695.0183 C365.44,718.8883 387.5075,729.6163 416.4075,735.9863 " fill="none" id="ConfigurationsModule-to-InventoryModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="424.22,737.7083,417.0533,733.0566,415.7618,738.916,424.22,737.7083" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="309" y="534.7798">Update</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="353" y="534.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="357" y="534.7798">schedule</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="312" y="548.9127">[HTTPS</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="354" y="548.9127">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="51" x="358" y="548.9127">Request]</text>
+           </g><!--link ConfigurationsModule to ReceptionModule-->
+           <g id="link_ConfigurationsModule_ReceptionModule">
+            <path d="M393.84,332.4283 C421.19,355.0783 470.14,393.3083 517,418.1783 C541.07,430.9483 561.4759,439.2836 585.9859,447.7236 " fill="none" id="ConfigurationsModule-to-ReceptionModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="593.55,450.3283,586.9627,444.8871,585.0091,450.5601,593.55,450.3283" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="518" y="400.7798">Update</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="562" y="400.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="566" y="400.7798">schedule</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="519.5" y="414.9127">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="573.5" y="414.9127">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="577.5" y="414.9127">Broker]</text>
+           </g><!--link MissionsModule to DatabaseModule-->
+           <g id="link_MissionsModule_DatabaseModule">
+            <path d="M946.75,867.6483 C924.98,844.6883 888.47,803.8083 864,763.8683 C835.43,717.2483 855.93,687.2783 815,651.0183 C792.24,630.8583 769.19,620.9514 740.46,614.0714 " fill="none" id="MissionsModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="732.68,612.2083,739.7614,616.9889,741.1587,611.1539,732.68,612.2083" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="51" x="865" y="742.0498">Updates</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="916" y="742.0498">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="920" y="742.0498">the</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="940" y="742.0498">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="944" y="742.0498">status</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="874" y="756.1827">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="928" y="756.1827">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="932" y="756.1827">Broker]</text>
+           </g><!--link InventoryModule to MissionsModule-->
+           <g id="link_InventoryModule_MissionsModule">
+            <path d="M540.55,764.2883 C580.16,785.1483 647.54,818.3783 709,837.8683 C725.73,843.1783 808.4454,858.4375 877.1554,870.7475 " fill="none" id="InventoryModule-to-MissionsModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="885.03,872.1583,877.6844,867.7945,876.6263,873.7005,885.03,872.1583" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="40" x="710.5" y="806.4698">Create</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="750.5" y="806.4698">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="754.5" y="806.4698">counting</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="57" x="731.5" y="820.6027">missions</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="710" y="834.7355">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="764" y="834.7355">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="768" y="834.7355">Broker]</text>
+           </g><!--link DatabaseModule to InventoryModule-->
+           <g id="link_DatabaseModule_InventoryModule">
+            <path d="M647.37,621.4883 C641.51,641.9183 629.61,674.3383 609,695.0183 C596.52,707.5483 587.4567,713.9141 571.4767,721.2141 " fill="none" id="DatabaseModule-to-InventoryModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="564.2,724.5383,572.7232,723.9429,570.2301,718.4854,564.2,724.5383" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="637" y="663.6198">Retrieve</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="687" y="663.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="42" x="691" y="663.6198">Layout</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="733" y="663.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="23" x="737" y="663.6198">and</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="682" y="677.7527">Units</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="648.5" y="691.8855">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="702.5" y="691.8855">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="706.5" y="691.8855">Broker]</text>
+           </g><!--link InventoryModule to DatabaseModule-->
+           <g id="link_InventoryModule_DatabaseModule">
+            <path d="M498.03,724.8283 C490.75,704.6483 483.31,672.4483 499,651.0183 C515.87,627.9883 535.9783,617.4842 563.3583,610.9542 " fill="none" id="InventoryModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="571.14,609.0983,562.6623,608.036,564.0542,613.8723,571.14,609.0983" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="501" y="670.6198">Sends</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="538" y="670.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="542" y="670.6198">the</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="562" y="670.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="566" y="670.6198">order</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="500" y="684.7527">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="554" y="684.7527">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="558" y="684.7527">Broker]</text>
+           </g><!--link ECommerce to InventoryModule-->
+           <g id="link_ECommerce_InventoryModule">
+            <path d="M390.01,621.4183 C379.33,629.0783 368.87,638.9983 363,651.0183 C354.43,668.5983 351.6,679.1283 363,695.0183 C377.44,715.1483 393.0265,724.7562 416.6365,731.7162 " fill="none" id="ECommerce-to-InventoryModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="424.31,733.9783,417.4848,728.8386,415.7882,734.5938,424.31,733.9783" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="364" y="670.6198">Sends</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="401" y="670.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="405" y="670.6198">the</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="425" y="670.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="429" y="670.6198">order</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="364.5" y="684.7527">[HTTPS</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="406.5" y="684.7527">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="51" x="410.5" y="684.7527">Request]</text>
+           </g><!--link LogisticAnalyst to AnalyticsModule-->
+           <g id="link_LogisticAnalyst_AnalyticsModule">
+            <path d="M119.76,162.4783 C67.05,193.9183 6,244.7983 6,311.7583 C6,311.7583 6,311.7583 6,888.2883 C6,946.5583 60.0676,976.8783 114.4076,994.4383 " fill="none" id="LogisticAnalyst-to-AnalyticsModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="122.02,996.8983,115.3301,991.5837,113.4851,997.293,122.02,996.8983" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="51" x="8.5" y="599.1998">Watches</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="59.5" y="599.1998">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="63.5" y="599.1998">the</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="78" x="7" y="613.3327">performance</text>
+           </g><!--link DatabaseModule to AnalyticsModule-->
+           <g id="link_DatabaseModule_AnalyticsModule">
+            <path d="M571.38,613.3883 C484.01,625.3783 355.77,643.9883 347,651.0183 C233.5,742.0183 209.776,927.3444 204.836,988.3244 " fill="none" id="DatabaseModule-to-AnalyticsModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="204.19,996.2983,207.8262,988.5666,201.8458,988.0822,204.19,996.2983" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="57" x="249" y="813.4698">Retrieves</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="306" y="813.4698">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="310" y="813.4698">the</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="330" y="813.4698">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="27" x="334" y="813.4698">data</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="255" y="827.6027">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="309" y="827.6027">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="313" y="827.6027">Broker]</text>
+           </g><!--link MissionsModule to AnalyticsModule-->
+           <g id="link_MissionsModule_AnalyticsModule">
+            <path d="M885.14,902.2383 C876.32,903.7583 867.47,905.2783 859,906.7083 C651.87,941.8283 415.5858,980.5212 291.7258,1000.7112 " fill="none" id="MissionsModule-to-AnalyticsModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="283.83,1001.9983,292.2084,1003.6721,291.2431,997.7503,283.83,1001.9983" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="57" x="679" y="949.3098">Retrieves</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="736" y="949.3098">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20" x="740" y="949.3098">the</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="760" y="949.3098">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="27" x="764" y="949.3098">data</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="685" y="963.4427">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="739" y="963.4427">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="743" y="963.4427">Broker]</text>
+           </g><!--link LayoutManager to LayoutModule-->
+           <g id="link_LayoutManager_LayoutModule">
+            <path d="M562.11,168.3883 C580.52,222.5883 618.37,316.8683 676,380.1783 C705.99,413.1283 743.6395,433.1139 779.5595,447.4439 " fill="none" id="LayoutManager-to-LayoutModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="786.99,450.4083,780.6711,444.6575,778.4478,450.2304,786.99,450.4083" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="47" x="677" y="310.3598">Creates</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="724" y="310.3598">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="13" x="728" y="310.3598">or</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="741" y="310.3598">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="55" x="745" y="310.3598">modifies</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="719" y="324.4927">layout</text>
+           </g><!--link LayoutModule to DatabaseModule-->
+           <g id="link_LayoutModule_DatabaseModule">
+            <path d="M831.84,489.8783 C819.26,507.9583 798.09,535.0583 774,552.1783 C756.63,564.5283 743.1585,571.4671 723.5485,578.9171 " fill="none" id="LayoutModule-to-DatabaseModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="716.07,581.7583,724.6139,581.7216,722.4831,576.1127,716.07,581.7583" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="807" y="534.7798">Sends</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="844" y="534.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="25" x="848" y="534.7798">new</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="873" y="534.7798">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="877" y="534.7798">layout</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="813" y="548.9127">[HTTPS</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="855" y="548.9127">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="51" x="859" y="548.9127">Request]</text>
+           </g><!--link LayoutModule to MissionsModule-->
+           <g id="link_LayoutModule_MissionsModule">
+            <path d="M885.88,489.9883 C900.01,498.1183 914.78,508.8683 925,522.1783 C982.51,597.0483 973.84,631.6883 988,725.0183 C995.81,776.4683 982.8502,829.6182 973.6302,859.7582 " fill="none" id="LayoutModule-to-MissionsModule" style="stroke:#000000;stroke-width:1.0;" />
+            <polygon fill="#000000" points="971.29,867.4083,976.499,860.6358,970.7614,858.8806,971.29,867.4083" style="stroke:#000000;stroke-width:1.0;" />
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="37" x="984" y="670.6198">Sends</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1021" y="670.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50" x="1025" y="670.6198">updates</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="4" x="1075" y="670.6198">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="52" x="1079" y="670.6198">required</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="1007.5" y="684.7527">[Message</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="4" x="1061.5" y="684.7527">&nbsp;</text>
+            <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="1065.5" y="684.7527">Broker]</text>
+           </g>
+           <rect fill="none" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1188.402" />
+           <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="51" x="1074" y="1201.9372">Legend</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1125" y="1201.9372">&nbsp;</text>
+           <rect fill="none" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1204.8903" />
+           <text fill="#444444" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1218.4255">▯</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1218.4255">&nbsp;</text>
+           <text fill="#444444" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="1094" y="1218.4255">boundary</text>
+           <text fill="#444444" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="41" x="1164" y="1219.2692">(dashed)</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1205" y="1218.4255">&nbsp;</text>
+           <rect fill="#F9D055" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1221.3786" />
+           <text fill="#AE913B" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1234.9138">▯</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1234.9138">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="1094" y="1234.9138">Employee</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1164" y="1234.9138">&nbsp;</text>
+           <rect fill="#69BEFF" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1237.8669" />
+           <text fill="#4985B2" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1251.402">▯</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1251.402">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="1094" y="1251.402">Context</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1153" y="1251.402">&nbsp;</text>
+           <rect fill="#D0A7FF" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1254.3552" />
+           <text fill="#9174B2" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1267.8903">▯</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1267.8903">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="1094" y="1267.8903">External</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1155" y="1267.8903">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="14" x="1078" y="1284.3786">─</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1092" y="1284.3786">&nbsp;</text>
+           <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="1100" y="1284.3786">Relationship</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1189" y="1284.3786">&nbsp;</text>
+           <rect fill="#66622E" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1287.3317" />
+           <text fill="#CCCCCC" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1300.8669">▯</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1300.8669">&nbsp;</text>
+           <text fill="#CCCCCC" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="216" x="1094" y="1300.8669">Operation Employees boundary</text>
+           <text fill="#CCCCCC" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="77" x="1314" y="1301.7106">(last back color)</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1391" y="1300.8669">&nbsp;</text>
+           <rect fill="#66622E" height="16.4883" style="stroke:none;stroke-width:1.0;" width="321" x="1074" y="1303.82" />
+           <text fill="#CCCCCC" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="8" x="1078" y="1317.3552">▯</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1086" y="1317.3552">&nbsp;</text>
+           <text fill="#CCCCCC" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="210" x="1094" y="1317.3552">Operation Managers boundary</text>
+           <text fill="#CCCCCC" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="77" x="1308" y="1318.1989">(last back color)</text>
+           <text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="1385" y="1317.3552">&nbsp;</text>
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1188.402" y2="1188.402" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1204.8903" y2="1204.8903" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1221.3786" y2="1221.3786" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1237.8669" y2="1237.8669" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1254.3552" y2="1254.3552" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1270.8434" y2="1270.8434" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1287.3317" y2="1287.3317" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1303.82" y2="1303.82" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1395" y1="1320.3083" y2="1320.3083" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1074" x2="1074" y1="1188.402" y2="1320.3083" />
+           <line style="stroke:none;stroke-width:1.0;" x1="1395" x2="1395" y1="1188.402" y2="1320.3083" />
+          </g>
+         </svg>
+        </div>
+        <div class="has-text-centered">
+         [<a href="svg/SystemLandscape.svg" target="_blank">svg</a>|<a href="png/SystemLandscape.png" target="_blank">png</a>|<a href="puml/SystemLandscape.puml" target="_blank">puml</a>]
+        </div>
+       </div>
+      </div><button class="modal-close is-large" aria-label="close" onclick="closeModal('SystemLandscape-modal')"></button>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div></div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="../reformat-mermaid.js"></script>
+    <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.5.1/dist/mermaid.esm.min.mjs';</script>
+  </body>
+</html>

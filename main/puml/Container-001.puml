@@ -1,0 +1,53 @@
+@startuml
+set separator none
+title Database Module - Containers
+
+top to bottom direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Container,Database", $bgColor="#95d1fe", $borderColor="#6892b1", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Container", $bgColor="#95d1fe", $borderColor="#6892b1", $fontColor="#000000", $sprite="", $shadowing="")
+
+AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
+
+AddBoundaryTag("Context", $bgColor="#ffffff", $borderColor="#4985b2", $fontColor="#4985b2", $shadowing="")
+
+System(LayoutModule, "Layout Module", $descr="", $tags="Context", $link="")
+System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
+System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
+System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
+
+System_Boundary("DatabaseModule_boundary", "Database Module", $tags="Context") {
+  Container(DatabaseModule.InventoryWrapper, "Inventory Wrapper", $techn="", $descr="Microservice", $tags="Container", $link="")
+  ContainerDb(DatabaseModule.InventoryUnits, "Inventory Units", $techn="", $descr="SQL Database", $tags="Container,Database", $link="")
+  Container(DatabaseModule.OrdersWrapper, "Orders Wrapper", $techn="", $descr="Microservice", $tags="Container", $link="")
+  ContainerDb(DatabaseModule.OrdersHistory, "Orders History", $techn="", $descr="NoSQL Database", $tags="Container,Database", $link="")
+  Container(DatabaseModule.SystemWrapper, "System Wrapper", $techn="", $descr="Microservice", $tags="Container", $link="")
+  ContainerDb(DatabaseModule.SystemManifest, "System Manifest", $techn="", $descr="NoSQL Database", $tags="Container,Database", $link="")
+}
+
+Rel_D(ShippingModule, DatabaseModule.OrdersWrapper, "Retrieve orders", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ShippingModule, MissionsModule, "Accepts completion", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ReceptionModule, DatabaseModule.InventoryWrapper, "Sends new values", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ReceptionModule, DatabaseModule.OrdersWrapper, "Create supplyment orders", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, DatabaseModule.SystemWrapper, "Change the configuration", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, InventoryModule, "Update schedule", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, ReceptionModule, "Update schedule", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(DatabaseModule.InventoryWrapper, DatabaseModule.InventoryUnits, "Manages the data", $techn="", $tags="Relationship", $link="")
+Rel_D(DatabaseModule.OrdersWrapper, DatabaseModule.OrdersHistory, "Manages the data", $techn="", $tags="Relationship", $link="")
+Rel_D(DatabaseModule.SystemWrapper, DatabaseModule.SystemManifest, "Manages the data", $techn="", $tags="Relationship", $link="")
+Rel_D(MissionsModule, DatabaseModule.OrdersWrapper, "Updates the status", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(MissionsModule, DatabaseModule.InventoryWrapper, "Updates the status", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(InventoryModule, MissionsModule, "Create counting missions", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(InventoryModule, DatabaseModule.OrdersWrapper, "Sends the order", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(LayoutModule, DatabaseModule.SystemWrapper, "Sends new layout", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(LayoutModule, MissionsModule, "Sends updates required", $techn="Message Broker", $tags="Relationship", $link="")
+
+SHOW_LEGEND(true)
+@enduml

@@ -1,0 +1,19 @@
+.navbar .has-site-branding {
+    background-color: #69BEFF!important;
+    color: #303030!important;
+}
+.navbar .has-site-branding::after {
+    border-color: #303030!important;
+}
+.menu .has-site-branding a.is-active {
+    color: #303030!important;
+    background-color: #69BEFF!important;
+}
+.input.has-site-branding {
+    color: dimgrey!important;
+    background-color: white!important;
+}
+.input.has-site-branding:focus {
+    border-color: #303030!important;
+    box-shadow: 0 0 0 0.125em #303030;
+}

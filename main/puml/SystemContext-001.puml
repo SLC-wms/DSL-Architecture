@@ -1,0 +1,40 @@
+@startuml
+set separator none
+title Database Module - System Context
+
+top to bottom direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+
+AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor="#000000", $sprite="", $shadowing="")
+
+AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
+
+System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
+System(LayoutModule, "Layout Module", $descr="", $tags="Context", $link="")
+System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
+System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
+System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
+
+Rel_D(ShippingModule, DatabaseModule, "Retrieve orders", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ShippingModule, MissionsModule, "Accepts completion", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ReceptionModule, DatabaseModule, "Sends new values", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, DatabaseModule, "Change the configuration", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, AnalyticsModule, "Update schedule", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, InventoryModule, "Update schedule", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, ReceptionModule, "Update schedule", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(MissionsModule, DatabaseModule, "Updates the status", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(InventoryModule, MissionsModule, "Create counting missions", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(DatabaseModule, InventoryModule, "Retrieve Layout and Units", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(InventoryModule, DatabaseModule, "Sends the order", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(DatabaseModule, AnalyticsModule, "Retrieves the data", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(MissionsModule, AnalyticsModule, "Retrieves the data", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(LayoutModule, DatabaseModule, "Sends new layout", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(LayoutModule, MissionsModule, "Sends updates required", $techn="Message Broker", $tags="Relationship", $link="")
+
+SHOW_LEGEND(true)
+@enduml

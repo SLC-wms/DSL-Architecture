@@ -1,0 +1,40 @@
+@startuml
+set separator none
+title Layout Module - Containers
+
+left to right direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+AddElementTag("Employee", $bgColor="#f9d055", $borderColor="#ae913b", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Container,Desktop", $bgColor="#8af0ac", $borderColor="#60a878", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Container", $bgColor="#95d1fe", $borderColor="#6892b1", $fontColor="#000000", $sprite="", $shadowing="")
+
+AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
+
+AddBoundaryTag("Context", $bgColor="#ffffff", $borderColor="#4985b2", $fontColor="#4985b2", $shadowing="")
+
+Person(LayoutManager, "Layout Manager", $descr="", $tags="Employee", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+
+System_Boundary("LayoutModule_boundary", "Layout Module", $tags="Context") {
+  Container(LayoutModule.LayoutBuilder, "Layout Builder", $techn="", $descr="Desktop App", $tags="Container,Desktop", $link="")
+  Container(LayoutModule.SchemaValidation, "Schema Validation", $techn="", $descr="Microservice", $tags="Container", $link="")
+  Container(LayoutModule.MissionGeneration, "Mission Generation", $techn="", $descr="Microservice", $tags="Container", $link="")
+  Container(LayoutModule.Authentication, "Authentication", $techn="", $descr="Firewall", $tags="Container", $link="")
+}
+
+Rel_D(MissionsModule, DatabaseModule, "Updates the status", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(LayoutManager, LayoutModule.LayoutBuilder, "Creates or modifies layout", $techn="", $tags="Relationship", $link="")
+Rel_D(LayoutModule.SchemaValidation, DatabaseModule, "Sends new layout", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(LayoutModule.SchemaValidation, LayoutModule.MissionGeneration, "Sends new layout", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(LayoutModule.MissionGeneration, MissionsModule, "Sends updates required", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(LayoutModule.LayoutBuilder, LayoutModule.Authentication, "Sends new layout", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(LayoutModule.Authentication, LayoutModule.SchemaValidation, "Redirects", $techn="", $tags="Relationship", $link="")
+
+SHOW_LEGEND(true)
+@enduml

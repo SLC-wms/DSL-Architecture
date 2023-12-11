@@ -1,0 +1,67 @@
+@startuml
+set separator none
+title System Landscape
+
+top to bottom direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+
+AddElementTag("Employee", $bgColor="#f9d055", $borderColor="#ae913b", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("External", $bgColor="#d0a7ff", $borderColor="#9174b2", $fontColor="#000000", $sprite="", $shadowing="")
+
+AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
+
+AddBoundaryTag("Operation Employees", $borderColor="#cccccc", $fontColor="#cccccc")
+Boundary(group_1, "Operation Employees", $tags="Operation Employees") {
+  Person(ReceivingEmployee, "Receiving Employee", $descr="", $tags="Employee", $link="")
+  Person(PickingEmployee, "Picking Employee", $descr="", $tags="Employee", $link="")
+  Person(PackingEmployee, "Packing Employee", $descr="", $tags="Employee", $link="")
+}
+
+AddBoundaryTag("Operation Managers", $borderColor="#cccccc", $fontColor="#cccccc")
+Boundary(group_2, "Operation Managers", $tags="Operation Managers") {
+  Person(Administrator, "Administrator", $descr="", $tags="Employee", $link="")
+  Person(LogisticAnalyst, "Logistic Analyst", $descr="", $tags="Employee", $link="")
+  Person(LayoutManager, "Layout Manager", $descr="", $tags="Employee", $link="")
+}
+
+System(ReceptionModule, "Reception Module", $descr="", $tags="Context", $link="")
+System(LayoutModule, "Layout Module", $descr="", $tags="Context", $link="")
+System(PickingModule, "Picking Module", $descr="", $tags="Context", $link="")
+System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
+System(AnalyticsModule, "Analytics Module", $descr="", $tags="Context", $link="")
+System(ConfigurationsModule, "Configurations Module", $descr="", $tags="Context", $link="")
+System(ECommerce, "E-Commerce", $descr="", $tags="External", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+System(InventoryModule, "Inventory Module", $descr="", $tags="Context", $link="")
+
+Rel_D(PackingEmployee, ShippingModule, "Finishes orders", $techn="", $tags="Relationship", $link="")
+Rel_D(ShippingModule, DatabaseModule, "Retrieve orders", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ShippingModule, MissionsModule, "Accepts completion", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(PickingEmployee, PickingModule, "Navigates with", $techn="", $tags="Relationship", $link="")
+Rel_D(MissionsModule, PickingModule, "Send a new mission", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(PickingModule, ShippingModule, "Ask for validation", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ReceivingEmployee, ReceptionModule, "Fills a form", $techn="", $tags="Relationship", $link="")
+Rel_D(ReceptionModule, DatabaseModule, "Sends new values", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(Administrator, ConfigurationsModule, "Make changes with", $techn="", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, DatabaseModule, "Change the configuration", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, AnalyticsModule, "Update schedule", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, InventoryModule, "Update schedule", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(ConfigurationsModule, ReceptionModule, "Update schedule", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(MissionsModule, DatabaseModule, "Updates the status", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(InventoryModule, MissionsModule, "Create counting missions", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(DatabaseModule, InventoryModule, "Retrieve Layout and Units", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(InventoryModule, DatabaseModule, "Sends the order", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ECommerce, InventoryModule, "Sends the order", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(LogisticAnalyst, AnalyticsModule, "Watches the performance", $techn="", $tags="Relationship", $link="")
+Rel_D(DatabaseModule, AnalyticsModule, "Retrieves the data", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(MissionsModule, AnalyticsModule, "Retrieves the data", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(LayoutManager, LayoutModule, "Creates or modifies layout", $techn="", $tags="Relationship", $link="")
+Rel_D(LayoutModule, DatabaseModule, "Sends new layout", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(LayoutModule, MissionsModule, "Sends updates required", $techn="Message Broker", $tags="Relationship", $link="")
+
+SHOW_LEGEND(true)
+@enduml

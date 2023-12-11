@@ -1,0 +1,45 @@
+@startuml
+set separator none
+title Shipping Module - Containers
+
+left to right direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+AddElementTag("Employee", $bgColor="#f9d055", $borderColor="#ae913b", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Container,Mobile", $bgColor="#8af0ac", $borderColor="#60a878", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Container", $bgColor="#95d1fe", $borderColor="#6892b1", $fontColor="#000000", $sprite="", $shadowing="")
+
+AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
+
+AddBoundaryTag("Context", $bgColor="#ffffff", $borderColor="#4985b2", $fontColor="#4985b2", $shadowing="")
+
+System(PickingModule, "Picking Module", $descr="", $tags="Context", $link="")
+Person(PackingEmployee, "Packing Employee", $descr="", $tags="Employee", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+
+System_Boundary("ShippingModule_boundary", "Shipping Module", $tags="Context") {
+  Container(ShippingModule.OrderFeed, "Order Feed", $techn="", $descr="Microservice", $tags="Container", $link="")
+  Container(ShippingModule.CompletePicking, "Complete Picking", $techn="", $descr="Microservice", $tags="Container", $link="")
+  Container(ShippingModule.SchemaValidation, "Schema Validation", $techn="", $descr="Microservice", $tags="Container", $link="")
+  Container(ShippingModule.Authentication, "Authentication", $techn="", $descr="Firewall", $tags="Container", $link="")
+  Container(ShippingModule.ShippingView, "Shipping View", $techn="", $descr="Responsive App", $tags="Container,Mobile", $link="")
+}
+
+Rel_D(PackingEmployee, ShippingModule.ShippingView, "Finishes orders", $techn="", $tags="Relationship", $link="")
+Rel_D(ShippingModule.OrderFeed, DatabaseModule, "Retrieve orders", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ShippingModule.CompletePicking, MissionsModule, "Accepts completion", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ShippingModule.SchemaValidation, ShippingModule.CompletePicking, "Completion request", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(ShippingModule.SchemaValidation, ShippingModule.OrderFeed, "Check pending orders", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ShippingModule.ShippingView, ShippingModule.Authentication, "Sends the form", $techn="HTTPS Request", $tags="Relationship", $link="")
+Rel_D(ShippingModule.Authentication, ShippingModule.SchemaValidation, "Redirects", $techn="", $tags="Relationship", $link="")
+Rel_D(MissionsModule, PickingModule, "Send a new mission", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(PickingModule, ShippingModule.CompletePicking, "Ask for validation", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(MissionsModule, DatabaseModule, "Updates the status", $techn="Message Broker", $tags="Relationship", $link="")
+
+SHOW_LEGEND(true)
+@enduml

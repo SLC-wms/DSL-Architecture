@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" class="has-background-light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Model | SLC-wms</title>
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet">
+    <link href="../../style.css" rel="stylesheet">
+    <link href="./../style-branding.css" rel="stylesheet">
+    <script type="text/javascript" src="../../svg-modal.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+    <link href="../site/favicon.ico" rel="icon" type="image/ico">
+    <link href="../site/custom.css" rel="stylesheet">
+  </head>
+  <body>
+    <script type="text/javascript" src="../../header.js"></script>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand has-site-branding"><a href="../" class="navbar-item"><img alt="SLC-wms" src="../site/logo.png"></a><a href="../" class="navbar-item"><span class="has-text-weight-semibold has-site-branding">SLC-wms</span></a></div>
+      <div class="navbar-menu has-site-branding">
+        <div class="navbar-end">
+          <div class="navbar-item"><input class="input is-small is-rounded has-site-branding" id="search" type="search" size="30" maxlength="50" placeholder="Search (requires 3 characters)..." onkeyup="redirect(event, value, '../search/')"></div>
+          <div class="navbar-item has-dropdown is-hoverable"><a class="navbar-link has-site-branding">main</a>
+            <div class="navbar-dropdown is-right"><a href="../../main/" class="navbar-item">main</a>
+              <hr class="navbar-divider">
+              <div class="navbar-item has-text-grey-light"><span>v</span><span>0.0.0</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="site-layout" id="site">
+      <aside class="menu p-3">
+        <p class="menu-label">General</p>
+        <ul class="menu-list has-site-branding">
+          <li><a href="../" class="">Home</a><a href="../software-systems/" class="">Software Systems</a><a href="./" class="is-active">Data Model</a></li>
+        </ul>
+        <p class="menu-label">Software systems</p>
+        <ul class="menu-list has-site-branding">
+          <li><a href="../analytics-module/" class="">Analytics Module</a><a href="../configurations-module/" class="">Configurations Module</a><a href="../database-module/" class="">Database Module</a><a href="../e-commerce/" class="">E-Commerce</a><a href="../inventory-module/" class="">Inventory Module</a><a href="../layout-module/" class="">Layout Module</a><a href="../missions-module/" class="">Missions Module</a><a href="../picking-module/" class="">Picking Module</a><a href="../reception-module/" class="">Reception Module</a><a href="../shipping-module/" class="">Shipping Module</a></li>
+        </ul>
+      </aside>
+      <div class="container is-fluid has-background-white">
+        <div class="content p-3">
+          <div><div class="sect1 content">
+ <h2 id="_data_model">Data Model</h2>
+ <div class="sectionbody">
+  <div class="paragraph content">
+   <p>The following pictures show the full data model divided into three groups. However, those groups are not independent, but rather connected to each other. The first group contains the Units related data which refers to a public part of the model, as the Ecommerce consumes it. The second group contains the Missions related data, which is more operational focused. Finally, the third group contains the data which have a higher hierarchy level, such as analytics or the administrator’s configurations.</p>
+  </div>
+  <div class="imageblock content">
+   <div class="content">
+    <img src="../pictures/units.png" alt="First group of schemas">
+   </div>
+  </div>
+  <div class="imageblock content">
+   <div class="content">
+    <img src="../pictures/missions.png" alt="Second group of schemas">
+   </div>
+  </div>
+  <div class="imageblock content">
+   <div class="content">
+    <img src="../pictures/admin.png" alt="Final group of schemas">
+   </div>
+  </div>
+  <div class="paragraph content">
+   <p>As it may have been seen, there is a notation on some properties, which have an <code>E</code>. Those properties are of type <code>enum</code> and the possible values are defined in the following picture.</p>
+  </div>
+  <div class="imageblock content">
+   <div class="content">
+    <img src="../pictures/enums.png" alt="Enum type definitions">
+   </div>
+  </div>
+ </div>
+</div></div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="../../reformat-mermaid.js"></script>
+    <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.5.1/dist/mermaid.esm.min.mjs';</script>
+  </body>
+</html>

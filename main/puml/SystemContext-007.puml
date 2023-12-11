@@ -1,0 +1,33 @@
+@startuml
+set separator none
+title Shipping Module - System Context
+
+left to right direction
+
+!include <C4/C4>
+!include <C4/C4_Context>
+
+AddElementTag("Employee", $bgColor="#f9d055", $borderColor="#ae913b", $fontColor="#000000", $sprite="", $shadowing="")
+AddElementTag("Context", $bgColor="#69beff", $borderColor="#4985b2", $fontColor="#000000", $sprite="", $shadowing="")
+
+AddRelTag("Relationship", $textColor="#000000", $lineColor="#000000", $lineStyle = "")
+
+AddBoundaryTag("Operation Employees", $borderColor="#cccccc", $fontColor="#cccccc")
+Boundary(group_1, "Operation Employees", $tags="Operation Employees") {
+  Person(PackingEmployee, "Packing Employee", $descr="", $tags="Employee", $link="")
+}
+
+System(PickingModule, "Picking Module", $descr="", $tags="Context", $link="")
+System(ShippingModule, "Shipping Module", $descr="", $tags="Context", $link="")
+System(DatabaseModule, "Database Module", $descr="", $tags="Context", $link="")
+System(MissionsModule, "Missions Module", $descr="", $tags="Context", $link="")
+
+Rel_D(PackingEmployee, ShippingModule, "Finishes orders", $techn="", $tags="Relationship", $link="")
+Rel_D(ShippingModule, DatabaseModule, "Retrieve orders", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(ShippingModule, MissionsModule, "Accepts completion", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(MissionsModule, PickingModule, "Send a new mission", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(PickingModule, ShippingModule, "Ask for validation", $techn="Message Broker", $tags="Relationship", $link="")
+Rel_D(MissionsModule, DatabaseModule, "Updates the status", $techn="Message Broker", $tags="Relationship", $link="")
+
+SHOW_LEGEND(true)
+@enduml
