@@ -1,50 +1,42 @@
-name: Deploy to Github Pages
+name: Build and Deploy
 
 on:
-    push:
-        branches: ["main"]
+  push:
+    branches:
+    - main
 
 permissions:
-    contents: read
-    pages: write
-    id-token: write
-
-concurrency:
-    group: "pages-deployment"
-    cancel-in-progress: false
+  contents: write
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        container:
-            image: ghcr.io/avisi-cloud/structurizr-site-generatr
-            options: --user root
-        steps:
-          - name: Git Checkout
-            uses: actions/checkout@v4
+  deploy_github_pages:
+    runs-on: macos-latest
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
 
-          - name: Build Site with Generatr
-            run: |
-                /opt/structurizr-site-generatr/bin/structurizr-site-generatr generate-site \
-                -w src/workspace.dsl \
-                --assets-dir src/assets \
-                --branches main \
-                --default-branch main
+    - name: Set up Environment
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '19'
 
-          - name: Setup Github Pages
-            if: ${{ success() }}
-            uses: actions/configure-pages@v3
+    - name: Install Dependencies
+      run: |
+        brew tap avisi-cloud/tools
+        brew install structurizr-site-generatr
 
-          - name: Upload Artifact
-            if: ${{ success() }}
-            uses: actions/upload-pages-artifact@v2
-            with:
-                path: 'build/site'
+    - name: Build the Site
+      run: |
+          structurizr-site-generatr generate-site \
+          --workspace-file src/workspace.dsl \
+          --assets-dir src/assets \
+          --branches main \
+          --default-branch main
 
-          - name: Deploy to GitHub Pages
-            if: ${{ success() }}
-            id: deployment
-            uses: actions/deploy-pages@v2
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: build/site
+        clean: true
