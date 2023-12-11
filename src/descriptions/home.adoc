@@ -1,5 +1,5 @@
 = SLC-wms Architecture
 
-Here is an overview.
+Here is a complete overview of the architecture. To navigate over it, just click on whichever box you want to know more about, or just look for it on the sidebar. You can also click on the caption to get a dedicated view.
 
 image::embed:SystemLandscape[Full Architecture]
