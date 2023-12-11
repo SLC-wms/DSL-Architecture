@@ -7,5 +7,6 @@ properties {
     "generatr.style.logoPath" "site/logo.png"
     "generatr.style.customStylesheet" "site/custom.css"
     "generatr.svglink.target" "_self"
-    "generatr.site.externalTag" "External System"
+    "generatr.site.externalTag" "External"
+    "generatr.site.nestGroups" "false"
 }

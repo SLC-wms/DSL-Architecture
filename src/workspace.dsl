@@ -1,8 +1,12 @@
-workspace "SLC-wms Architecture" {
+workspace "SLC-wms" {
     !docs ./descriptions
     !identifiers hierarchical
 
     model {
+        properties {
+            "structurizr.groupSeparator" "/"
+        }
+
         !include ./wms-references.dsl
         !include ./systems/database.dsl
         !include ./systems/missions.dsl

@@ -1,6 +1,8 @@
 = Data Model
 :imagesdir: ../assets
 
+== Data Model
+
 The following pictures show the full data model divided into three groups. However, those groups are not independent, but rather connected to each other. The first group contains the Units related data which refers to a public part of the model, as the Ecommerce consumes it. The second group contains the Missions related data, which is more operational focused. Finally, the third group contains the data which have a higher hierarchy level, such as analytics or the administrator's configurations.
 
 image::/pictures/units.png[First group of schemas]

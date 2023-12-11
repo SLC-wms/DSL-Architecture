@@ -10,7 +10,7 @@ relationship "Relationship" {
     routing Curved
 }
 
-element "External System" {
+element "External" {
     shape Box
     background "#D0A7FF"
 }
