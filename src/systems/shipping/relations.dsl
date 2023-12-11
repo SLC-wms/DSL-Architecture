@@ -1,8 +1,10 @@
 !ref shipping {
     view = container "Shipping View" "Responsive App" "" "Mobile" {
-        packer -> this "Complete orders"
+        packer -> this "Finishes orders"
     }
-    feed = container "Order Feed" "Microservice" "" "Container"
+    feed = container "Order Feed" "Microservice" "" "Container" {
+        -> database.orders "Retrieve orders" "Message Broker"
+    }
     comp = container "Complete Picking" "Microservice" "" "Container" {
         -> missions.comp "Accepts completion" "Message Broker"
     }

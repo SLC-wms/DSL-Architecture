@@ -1,6 +1,6 @@
 !ref database {
     inventory = container "Inventory Wrapper" "Microservice" "" "Container"
-    container "Inventory Units" "NoSQL Database" "" "Database" {
+    container "Inventory Units" "SQL Database" "" "Database" {
         inventory -> this "Manages the data"
     }
 

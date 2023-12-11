@@ -2,7 +2,7 @@
     scheduled = container "Cycle Counting" "Scheduled" "" "Container" {
         -> missions.wrapper "Create counting missions" "Message Broker"
     }
-    supplier = container "Supplier" "Microservice" "" "Container" {
+    supplier = container "Unit Supplier" "Microservice" "" "Container" {
         -> missions.wrapper "Create supplying missions" "Message Broker"
     }
     ordering = container "Mission Generator" "Microservice" "" "Container" {
